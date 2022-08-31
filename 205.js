@@ -4,21 +4,26 @@
  * @return {boolean}
  */
  var isIsomorphic = function(s, t) {
-    let splitS = s.split('');
-    let splitT = t.split('');
+    if (s.length != t.length) {
+        return false
+    };
 
-    let uniqueS = [...new Set(splitS)];
-    let uniqueT = [...new Set(splitT)];
+    let sCodes = s.split('');
+    let tCodes = t.split('');
+    let test = [];
 
-    if (uniqueS.length != uniqueT.length) {return false}
-
-    console.log(uniqueS, uniqueT);
-
-    for(x = 0; x < s.length; x++) {
-        s = s.replaceAll(splitS[x], splitT[x])
-        console.log(s)
+    for(x=0; x < s.length; x++) {
+        test[x] = [sCodes[x], tCodes[x]]
     }
-    return s == t;
+
+    for(x=0; x < test.length; x++) {
+        for(y=0; y < test.length; y++) {
+            if((JSON.stringify(test[x]) != JSON.stringify(test[y])) && (test[x][0] == test[y][0] || test[x][1] == test[y][1])) {
+                return false;
+            }
+        }
+    }
+    return true;
 };
 
 console.log(isIsomorphic('abab', 'baba'));
