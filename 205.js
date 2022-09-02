@@ -18,20 +18,15 @@
         if([sCodes[x]] in test && test[sCodes[x]] != tCodes[x]) {
             return false;
         }
-        console.log(`Obj.values: ${Object.values(test)}`);
-        console.log(`sCodes[x]: ${sCodes[x]}`)
-        console.log(test[tCodes[x]]);
-        if(Object.values(test).includes(tCodes[x]) && test[tCodes[x]] != sCodes[x]) {
+        test = {...test, ...newObj1};
+        if(Object.values(test).length != [...new Set(Object.values(test))].length) {
             return false;
         }
-        test = {...test, ...newObj1};
-        console.log(test);
     }
-
     return true;
 };
 
-//console.log(isIsomorphic('badc', 'baba'));
-console.log(isIsomorphic('paper', 'title')); // Returns false instead of true
+console.log(isIsomorphic('badc', 'baba'));
+//console.log(isIsomorphic('paper', 'title')); // Returns false instead of true
 // console.log(isIsomorphic('geed', 'rwtt'));
 // console.log(isIsomorphic('abab', 'dede'));
